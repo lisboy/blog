@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="../img/favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="img/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/bootstrap.min.css">
+    <title>lisboy个人博客后台管理</title>
+<body style="background-image: url('../img/honghong.jpg');background-size: 100% 100%;width: 1500px;height: 720px;">
+
+<div style="width: 300px;height: 300px;position: absolute;top: 0px;left: 0px;right: 0px;bottom: 0px;margin: auto auto;border: 1px">
+<p style="text-align: center;color: #9c3328;font-size: 20px;">lisboy个人博客后台管理系统</p>
+    <form th:action="@{/admin/login}" method="post">
+    <div class="form-group">
+        <input type="text" class="form-control"  placeholder="username"  name="username"/>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control"  placeholder="Password"  name="password"/>
+    </div>
+    <input type="submit" class="btn btn-primary btn-lg btn-block" value="登录"/>
+</form>
+</div>
+<script src="../dist/js/bootstrap.min.js"></script>
+<script src="../dist/js/jquery-1.12.4.js"></script>
+</body>
+</html>

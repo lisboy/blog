@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="author" content="">
+      <meta name="description" content="">
+      <meta name="keywords" content="">
+      <!-- Title-->
+      <title>link-lisboy</title>
+      <!-- Favicon-->
+      <link href="../img/favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="img/favicon.ico"/>
+      <link rel="icon" href="image/favicon.jpg" type="image/x-icon">
+      <!-- Stylesheets-->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/all.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/blog.css">
+       <!-- 引入样式 -->
+       <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+       <!-- 引入组件库 -->
+<style>
+    .toggleModal{
+        opacity: 0.8;
+        border-radius: 5px;
+        color: deeppink;
+        border: none;
+    }
+    .toggleModal:hover{
+        border: 2px deeppink solid;
+        color: yellow;
+    }
+    .modal{
+        width: 550px;
+        height: 420px;
+        color: red;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 9;
+        background-color: #FFF;
+        transform: translate(-50%,-50%);
+        opacity: 0.9;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .modal input{
+        width: 80%;
+        height: 40px;
+    }
+</style>
+   </head>
+   <body style=";background: url('image/body.jpg') no-repeat center center fixed ;background-size: cover;">
+      <!-- SECTION 0 NAV -->
+      <header th:replace="navitagion/main_header::main_header"></header>
+      <div  style="opacity: 1;margin-top: 50px">
+         <div class="container" >
+            <div class="row">
+               <div class="col-md-12 themelazer_content">
+                   <p style="color: #e4405f;text-align: center;font-size: 28px;">志同道合</p>
+                   <hr style="background-color: #7cb8bb;height: 1px;width: 100%">
+                   <div >
+                       <div>
+                           <li><p style="color: #e4405f">添加友链请在填写友链申请，申请通过后请将本站添加入贵站。</p></li>
+                       </div>
+                       <ul style="background-color: #7cb8bb;background: rgba(255,255,255,0.5);border-radius: 10px">
+                           <li><div style="width: 10px;height: 30px;background-color: #00ca6d;float: left;margin-right: 10px"></div><p style="color: #e4405f">友链名称: 技术FAN</p></li>
+                           <li><div style="width: 10px;height: 30px;background-color: #00ca6d;float: left;margin-right: 10px"></div><p style="color: #e4405f">url: http://www.lisboy.top</p></li>
+                           <li><div style="width: 10px;height: 30px;background-color: #00ca6d;float: left;margin-right: 10px"></div><p style="color: #e4405f">logo: http://lisboy.top/img/dbb5a4fd851e831038eff04e97327ec2.jpeg</p></li>
+                           <li><div style="width: 10px;height: 30px;background-color: #00ca6d;float: left;margin-right: 10px"></div><p style="color: #e4405f">描述: 有你的地方才叫生活</p></li>
+                       </ul>
+                       <div class="containe">
+                           <div>
+                               <a href="#" class="toggleModal" id="toggleModal">友链申请</a>
+                           </div>
+                           <div class="modal">
+                               <div class="modal-header">
+                                   <p style="color: #e4405f;font-size: 18px" class="title">友链申请</p>
+                                   <a  href="#" class="close">×</a>
+                               </div>
+                               <form onsubmit="return sub()" th:action="@{/pending}" method="post">
+                               <p><input id="blogname" type="text" placeholder="博客名称" onBlur="checkUserName()" oninput="checkUserName()" name="blogname"><span id="nameErr" style="color: red;position: absolute"></span></p>
+                               <p><input id="url" type="text" placeholder="url" onBlur="checkurl()" oninput="checkurl()" name="url"><span id="urlErr" style="color: red;position: absolute"></span></p>
+                               <p><input id="logo" type="text" placeholder="logo" onBlur="checklogo()" oninput="checklogo()" name="logo"><span id="logoErr" style="color: red;position: absolute"></span></p>
+                               <p><input id="description" type="text" placeholder="描述" onBlur="checkdescription()" oninput="checkdescription()" name="description"><span id="descriptionErr" style="color: red;position: absolute"></span></p>
+                               <p><input id="email" type="email" placeholder="你的邮箱" onBlur="checkemail()" oninput="checkemail()" name="email"><span id="emailErr" style="color: red;position: absolute"></span></p>
+                               <div class="modal-footer">
+                                   <input  style="margin: 0px auto" class="close btn" type="submit" value="申请"></input>
+                               </div>
+                               </form>
+                           </div>
+                           <div class="mask"></div>
+                       </div>
+                   </div>
+
+            <div class="row" >
+                <div style="margin: 0px auto">友人帐</div>
+                <hr style="background-color: #7cb8bb;height: 1px;width: 100%">
+            <div class="col-md-4"  th:each="friend:${friends}" th:if="${friend.getClassification()eq '友人帐'}">
+                 <div class="divi blog-style-one blog-small-grid "  th:style="'border-radius: 20px;background-image:url('+${#request.getContextPath()+friend.getLogo()}+');background-size:100% 100%;color: #FFF;background-color: #FFF'">
+                     <a th:href="${friend.getUrl()}" ><div style="height: 200px;"></div></a>
+                     <div>
+                    <div class="single-blog-style-one" style="background-color: black;color: #FFF;width: 95%;filter:Alpha(opacity=0.5);opacity: 0.8;border-radius: 10px;padding: 0px 10px;margin: 0px auto" >
+                        <h3>
+                            <a class="al" th:href="${friend.getUrl()}"  th:text="${friend.getBlogname()}" ></a>
+                        </h3>
+                        <div class="meta-info"  >
+                        </div>
+                        <p style="color: #FFF" th:text="${#strings.abbreviate(friend.getIntroduction(),80)}"></p>
+                    </div>
+                </div>
+               </div>
+            </div>
+
+          </div>
+                   <div class="row" >
+                       <div style="margin: 0px auto">诗与远方</div>
+                       <hr style="background-color: #7cb8bb;height: 1px;width: 100%">
+                       <div class="col-md-4"  th:each="friend:${friends}" th:if="${friend.getClassification()eq '诗与远方'}">
+                           <div class="divi blog-style-one blog-small-grid "  th:style="'border-radius: 20px;background-image:url('+${#request.getContextPath()+friend.getLogo()}+');background-size:100% 100%;color: #FFF;background-color: #FFF'">
+                               <a th:href="${friend.getUrl()}" ><div style="height: 200px;"></div></a>
+                               <div>
+                                   <div class="single-blog-style-one" style="background-color: black;color: #FFF;width: 95%;filter:Alpha(opacity=0.5);opacity: 0.8;border-radius: 10px;padding: 0px 10px;margin: 0px auto" >
+                                       <h3>
+                                           <a class="al" th:href="${friend.getUrl()}"  th:text="${friend.getBlogname()}" ></a>
+                                       </h3>
+                                       <div class="meta-info"  >
+                                       </div>
+                                       <p style="color: #FFF" th:text="${#strings.abbreviate(friend.getIntroduction(),80)}"></p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+
+                   </div>
+                   <div class="row" >
+                       <div style="margin: 0px auto">大牛</div>
+                       <hr style="background-color: #7cb8bb;height: 1px;width: 100%">
+                       <div class="col-md-4"  th:each="friend:${friends}" th:if="${friend.getClassification()eq '大牛'}">
+                           <div class="divi blog-style-one blog-small-grid "  th:style="'border-radius: 20px;background-image:url('+${#request.getContextPath()+friend.getLogo()}+');background-size:100% 100%;color: #FFF;background-color: #FFF'">
+                               <a th:href="${friend.getUrl()}" ><div style="height: 200px;"></div></a>
+                               <div>
+                                   <div class="single-blog-style-one" style="background-color: black;color: #FFF;width: 95%;filter:Alpha(opacity=0.5);opacity: 0.8;border-radius: 10px;padding: 0px 10px;margin: 0px auto" >
+                                       <h3>
+                                           <a class="al" th:href="${friend.getUrl()}"  th:text="${friend.getBlogname()}" ></a>
+                                       </h3>
+                                       <div class="meta-info"  >
+                                       </div>
+                                       <p style="color: #FFF" th:text="${#strings.abbreviate(friend.getIntroduction(),80)}"></p>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+
+                   </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div th:replace="navitagion/main_bottom::footer"></div>
+      <script src="js/jquery.js"></script>
+      <script src="js/jquery.sticky.js"></script>
+      <script src="js/theia-sticky-sidebar.js"></script>
+      <script src="js/fluidvids.js"></script>
+      <script src="js/justified.js"></script>
+      <script src="js/slick.js"></script>
+      <script src="js/masonry.pkgd.min.js"></script>
+      <script src="js/main.js"></script>
+      <script type="text/javascript" src="js/blog.js"></script>
+      <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+      <script>
+          window.onload = function(){
+              // 获取需要使用到的元素
+              var toggleModal = document.getElementById("toggleModal");
+              var containe = document.getElementsByClassName("container")[0];
+              var mask = document.getElementsByClassName("mask")[0];
+              var modal = document.getElementsByClassName("modal")[0];
+              var closes = document.getElementsByClassName("close");
+              toggleModal.onclick = show;
+              closes[0].onclick = close;
+              closes[1].onclick = close;
+              function show(){
+                  mask.style.display = "block";
+                  modal.style.display = "block";
+              }
+              function close(){
+                  mask.style.display = "none";
+                  modal.style.display = "none";
+              }
+          }
+
+          function checkForm(){
+              var nametip = checkUserName();
+              var passtip = checkPassword();
+              var conpasstip = ConfirmPassword();
+              var phonetip = checkPhone();
+              return nametip && passtip && conpasstip && phonetip;
+          }
+          //验证用户名
+          function checkUserName(){
+              var username = document.getElementById('blogname');
+              var errname = document.getElementById('nameErr');
+              if(username.value.length == 0){
+                  errname.innerHTML="*"
+                  errname.className="error"
+                  errname.style.color="red"
+                  return false;
+              }
+              else{
+                  errname.innerHTML="OK"
+                  errname.style.color="green"
+                  return true;
+              }
+          }
+          //验证用户名
+          function checkurl(){
+              var username = document.getElementById('url');
+              var errname = document.getElementById('urlErr');
+              if(username.value.length == 0){
+                  errname.innerHTML="*"
+                  errname.className="error"
+                  errname.style.color="red"
+                  return false;
+              }
+              else{
+                  errname.innerHTML="OK"
+                  errname.style.color="green"
+                  return true;
+              }
+          }
+          //验证用户名
+          function checklogo(){
+              var username = document.getElementById('logo');
+              var errname = document.getElementById('logoErr');
+              if(username.value.length == 0){
+                  errname.innerHTML="*"
+                  errname.className="error"
+                  errname.style.color="red"
+                  return false;
+              }
+              else{
+                  errname.innerHTML="OK"
+                  errname.style.color="green"
+                  return true;
+              }
+          }
+          //验证用户名
+          function checkdescription(){
+              var username = document.getElementById('description');
+              var errname = document.getElementById('descriptionErr');
+              if(username.value.length == 0){
+                  errname.innerHTML="*"
+                  errname.className="error"
+                  errname.style.color="red"
+                  return false;
+              }
+              else{
+                  errname.innerHTML="OK"
+                  errname.style.color="green"
+                  return true;
+              }
+          }
+          //验证用户名
+          function checkemail(){
+              var username = document.getElementById('email');
+              var errname = document.getElementById('emailErr');
+              var pattern =  /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/; //验证手机号正则表达式
+              if(!pattern.test(username.value)){
+                  errname.innerHTML="请正确输入邮箱"
+                  errname.style.color="red"
+                  return false;
+              }
+              if(username.value.length == 0){
+                  errname.innerHTML="*"
+                  errname.className="error"
+                  errname.style.color="red"
+                  return false;
+              }
+              else{
+                  errname.innerHTML="OK"
+                  errname.style.color="green"
+                  return true;
+              }
+          }
+
+
+          function sub(){
+               checkUserName = checkUserName();
+               checkemail = checkemail();
+               checkurl = checkurl();
+               checklogo = checklogo();
+               checkdescription = checkdescription();
+              if (checkUserName&&checkemail&&checkurl&&checklogo&&checkdescription){
+                  return true;
+              }else {
+                      alert("请正确填写");
+                      window.location.reload();
+                      return false;
+              }
+          }
+      </script>
+
+   </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- Title-->
+    <title>Home</title>
+    <!-- Favicon-->
+    <link rel="icon" href="image/favicon.jpg" type="image/x-icon">
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/blog.css">
+</head>
+<body>
+
+<div class="col-md-4 themelazer_sidebar" th:fragment="rigth" style="opacity: 1">
+                <div class="sidebar" >
+                    <div class="themelazer-widget-author" style="border-radius: 10px;">
+                        <div class="author-container">
+                            <h5 class="themelazer-author-title"> <a href="#" rel="author">技术FAN</a></h5>
+                            <div class="themelazer-author-avatar">
+                                <a th:href="@{/toabout}" rel="author"><img alt="" src="/img/dbb5a4fd851e831038eff04e97327ec2.jpeg" class="avatar avatar-80 photo"> </a>
+                            </div>
+                            <div class="themelazer-author-data">
+                                <div class="author-description" style="color: #FFF">梦想再远，依然远航，理想再高，风帆依起！
+                                </div>
+                                <div class="themelazer-autograph-about">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="single-sidebar recent-post-widget" >
+                        <div class="title">
+                            <h3 style="color: #FFF">热门博文</h3>
+                        </div>
+                        <div  class="recent-post-wrapper" th:each="host:${hostblog}" th:if="${host.getRecommend() eq '1'}">
+                            <div class="themelazer_article_list">
+                                <div class="post-outer">
+                                    <div class="post-inner">
+                                        <div class="post-thumbnail sidebar"> <img  th:src="${#request.getContextPath()+host.getImgs()}" alt="image">
+
+                                            <a th:href="@{/toreadblog(id=${host.getId()})}"></a>
+                                        </div>
+                                    </div>
+                                    <div class="post-inner">
+                                        <div class="entry-header">
+                                            <div class="themelazer_post_categories">
+                                            </div>
+                                            <h2 > <a class="al" th:href="@{/toreadblog(id=${host.getId()})}"  th:text="${host.title}">The inspirational Instagram accounts you can check</a></h2>
+                                            <div class="meta-info">
+                                                <ul>
+                                                    <li class="post-date" style="color: #FFF" th:text="${#dates.format(host.getCreationtime(),'yyyy-MM-dd HH:mm:ss')}">July 09 2019</li>
+                                                    <li class="post-view" style="color: #FFF" th:text="${host.getViews()+'   Views'}">89K Views</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="title">
+                            <h3 style="color: #FFF">作者相关</h3>
+                        </div>
+                        <div class="themelazer_banner_spot">
+                            <div class="themelazer_content_banner">
+                                <div class="themelazer_bg_image_banner">
+                                    <li><a style="color: #FFF" href="https://blog.csdn.net/MemoryLoss78">CSDN博客:https://blog.csdn.net/MemoryLoss78</a></li>
+                                    <li style="color: #FFF">qq:2426415604</li>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="title">
+                            <h3 style="color: #FFF">Tages</h3>
+                        </div>
+                        <div class="themelazer_widget_content">
+                            <div class="themelazer_tagcloud" >
+                                <span th:each="lables:${lable}"><a  th:href="@{/catcearch(find=${lables.getLable()})}" class="tag-cloud-link al" th:text="${lables.getLable()}">Atmospheric</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<button class="scroll-totop-wrapper" ><div class="scroll-totop "><i class="ti-angle-up"></i></div></button>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/theia-sticky-sidebar.js"></script>
+<script src="js/fluidvids.js"></script>
+<script src="js/justified.js"></script>
+<script src="js/slick.js"></script>
+<script src="js/masonry.pkgd.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

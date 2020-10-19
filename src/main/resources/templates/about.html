@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="author" content="">
+      <meta name="description" content="">
+      <meta name="keywords" content="">
+      <!-- Title-->
+      <title >关于-lisboy</title>
+      <!-- Favicon-->
+       <link href="../img/favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="img/favicon.ico"/>
+      <!-- Stylesheets-->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/all.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" th:href="@{/editormd/css/editormd.min.css}"/>
+       <link rel="stylesheet" href="css/blog.css">
+   </head>
+   <body style=";background: url('image/body.jpg') no-repeat center center fixed ;background-size: cover;">
+      <!-- SECTION 0 NAV -->
+      <header th:replace="navitagion/main_header::main_header"></header>
+      <section >
+          <form th:action="@{/catcearch}" method="get">
+              <div class="themelazer_letter_area" >
+                  <div class="container" >
+                      <div class="bt-newsletter-wrap" >
+                          <div class="news-img"></div>
+                          <div class="news-content" style="border-radius: 20px;background-image: url('image/u=458327471,2618665836&fm=26&gp=0.jpg');background-size: 100% 100%">
+                              <div class="news-text">
+                                  <h4>扬帆起航！</h4>
+                                  <p>小小的我有大大的梦</p>
+                              </div>
+                              <div class="form-wrap">
+                                  <input class="inputfind" type="text" name="find" placeholder="内容" required="" style="width: 70%;height: 50px;font-size: 20px;padding: 5px">
+                                  <input type="submit" value="搜索">
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </form>
+      </section>
+      <div style="opacity: 1;margin: 30px 0px;">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-8">
+                  <div class="single_header_wrapper">
+                  <div class="themelazer_single_content">
+                     <div id="doc-content" style="border-radius: 20px;background-color: #d4cece">
+                         <ul style="font-size: 20px">
+                             <li style="color: #00ca6d">I am ：LISBOY</li>
+                             <li style="color: #00ca6d">年龄：22</li>
+                             <li style="color: #00ca6d">职业：大三在读</li>
+                             <li style="color: #00ca6d">技术方向：java后端开发</li>
+                             <li style="color: #00ca6d">邮箱：lis98boy@163.com</li>
+                             <li style="color: #00ca6d">爱好：街舞，游戏</li>
+                         </ul>
+                         <p style="color: #00ca6d;font-size: 18px;text-indent: 2em;">1998年的男孩，正在往男人的方向发展，初来乍到，请多指教。本人想往java后端方向发展，前端技术比较繁琐，用了模板之家的模板稍作改动，后续会自己制作主题
+                         后台使用adminLTE，希望在今后能与各位互相认识，互相交流</p>
+                         <p style="color: #00ca6d;font-size: 18px;text-indent: 2em;">本站前后端均本人所做,我一直相信，兴趣是最好的老师，相信未来自己也能成为一名技术大牛，主专技术站长，以后会添加一些趣事和自己的日常经历，希望能帮助到各位。</p>
+                         <p style="color: #00ca6d;font-size: 18px;text-indent: 2em;">技术未全面，优化未做好，加油!</p>
+                     </div>
+                  </div>
+               </div>
+               </div>
+               <div th:replace="navitagion/rigth::rigth"></div>
+
+         </div>
+      </div>
+
+     <div th:replace="navitagion/main_bottom::footer"></div>
+      <script src="js/jquery.js"></script>
+      <script src="js/jquery.sticky.js"></script>
+      <script src="js/theia-sticky-sidebar.js"></script>
+      <script src="js/fluidvids.js"></script>
+      <script src="js/justified.js"></script>
+      <script src="js/slick.js"></script>
+      <script src="js/masonry.pkgd.min.js"></script>
+      <script src="js/main.js"></script>
+          <script type="text/javascript" src="js/blog.js"></script>
+      <script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+      <script th:src="@{/editormd/lib/flowchart.min.js}"></script>
+      <script th:src="@{/editormd/lib/jquery.flowchart.min.js}"></script>
+      <script th:src="@{/editormd/lib/marked.min.js}"></script>
+      <script th:src="@{/editormd/lib/prettify.min.js}"></script>
+      <script th:src="@{/editormd/lib/raphael.min.js}"></script>
+      <script th:src="@{/editormd/lib/sequence-diagram.min.js}"></script>
+      <script th:src="@{/editormd/lib/underscore.min.js}"></script>
+      <script th:src="@{/editormd/editormd.min.js}"></script>
+      <script type="text/javascript">
+         var testEditor;
+         $(function () {
+            testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id
+               htmlDecode: "style,script,iframe",
+               emoji: true,
+               taskList: true,
+               // tex: true, // 默认不解析
+               // flowChart: true, // 默认不解析
+               // sequenceDiagram: true, // 默认不解析
+               codeFold: true,
+            });
+         });
+      </script>
+   </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- Title-->
+    <title>Single Post Standard</title>
+    <!-- Favicon-->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 640px;
+            height: 120px;
+            margin: 100px auto;
+            background-color: #646464;
+            position: relative;
+            overflow: hidden;
+        }
+        #div1 ul{
+            position:absolute;
+            left:0;
+            top:0;
+            overflow: hidden;
+            background-color: #3b7796;
+        }
+
+        #div1 ul li{
+            float: left;
+            width: 160px;
+            height: 120px;
+            list-style: none;
+        }
+    </style>
+    <link rel="icon" href="img/yishuzi.png" type="image/x-icon">
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div th:fragment="footer" >
+<footer class="footer-area">
+    <div class="themelazer_footer_widget_area">
+        <div class="container">
+            <div class="row-centered">
+                <div class="col-md-4 col-sm-12">
+                    <div class="themelazer_footer_menu" >
+                        <img src="img/weixin.png" width="80" height="80">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="themelazer_logo_footer2">
+                        <a th:href="@{/index}"><img src="img/yishuzi.png" alt="" title=""></a>
+                        <p style="color:#FFF">本站是个人博客，不做商业用途。</p>
+                        <p style="color:#FFF">所有文章未经授权禁止转载、摘编、复制或建立镜像，如有违反，追究法律责任。</p>
+                        <p style="color:#FFF">© 2020  备案号:桂ICP备2020006787号</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="themelazer_footer_social_media">
+                        <ul class="themelazer_social_wrapper">
+                            <li><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li><a href="#"><i class="ti-pinterest-alt"></i></a></li>
+                            <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
+<!-- footer area end -->
+<aside class="sidemenuoption">
+    <div class="sidemenuoption-inner" >
+        <span class="menuoption-close"><i class="ti-close"></i></span>
+        <div class="site-name-logo">
+            <div class="site-name">
+                <a th:href="@{/index}"><img src="img/yishuzi.png" alt="" title=""></a>
+            </div>
+        </div>
+        <div class="themelazer_mobile_menu"></div>
+    </div>
+</aside>
+<div class="body-overlay" ></div>
+<div class="scroll-totop-wrapper" ><button class="scroll-totop "><i class="ti-angle-up"></i></button></div>
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/theia-sticky-sidebar.js"></script>
+<script src="js/fluidvids.js"></script>
+<script src="js/justified.js"></script>
+<script src="js/slick.js"></script>
+<script src="js/masonry.pkgd.min.js"></script>
+<script src="js/main.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js" ></script>
+<script>
+    window.onload = function(){
+        var oDiv = document.getElementById('div1');
+        var oUl = document.getElementById('ul1');
+        var speed = 2;//初始化速度
+
+        oUl.innerHTML += oUl.innerHTML;//图片内容*2-----参考图（2）
+        var oLi= document.getElementsByTagName('li');
+        oUl.style.width = oLi.length*160+'px';//设置ul的宽度使图片可以放下
+
+        var oBtn1 = document.getElementById('btn1');
+        var oBtn2 = document.getElementById('btn2');
+
+
+        function move(){
+            if(oUl.offsetLeft<-(oUl.offsetWidth/2)){//向左滚动，当靠左的图4移出边框时
+                oUl.style.left = 0;
+            }
+
+            if(oUl.offsetLeft > 0){//向右滚动，当靠右的图1移出边框时
+                oUl.style.left = -(oUl.offsetWidth/2)+'px';
+            }
+
+            oUl.style.left = oUl.offsetLeft + speed + 'px';
+        }
+
+        oBtn1.addEventListener('click',function(){
+            speed = -2;
+        },false);
+        oBtn2.addEventListener('click',function(){
+            speed = 2;
+        },false);
+
+        var timer = setInterval(move,30);//全局变量 ，保存返回的定时器
+
+        oDiv.addEventListener('mouseout', function () {
+            timer = setInterval(move,30);
+        },false);
+        oDiv.addEventListener('mousemove', function () {
+            clearInterval(timer);//鼠标移入清除定时器
+        },false);
+    }
+</script>
+</body>
+</html>

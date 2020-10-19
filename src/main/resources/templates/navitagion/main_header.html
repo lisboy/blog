@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- Title-->
+    <title>Home</title>
+    <!-- Favicon-->
+    <link rel="icon" href="image/favicon.jpg" type="image/x-icon">
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body >
+<!-- SECTION 0 NAV -->
+<header class="themelazer_main_header"   th:fragment="main_header">
+
+    <div  style="opacity: 0.8;background-color: #FFF">
+        <div class="container clearfix">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="themelazer_promomenu_wrapper">
+
+                        <div class="themelazer_mobile_logo ">
+                            <a th:href="@{/index}"><img src="img/yishuzi.png" alt="" title=""></a>
+                        </div>
+                        <div class="themelazer-nav clearfix">
+                            <!-- Main Menu -->
+                            <div class="themelazer-navigation">
+                                <ul class="menu black_color" style="font-size: 15px">
+                                    <li >
+                                        <a th:href="@{/home}">文章</a>
+                                    </li>
+                                    <li >
+                                        <a th:href="@{/catarchive}">时间轴</a>
+                                    </li>
+                                    <li >
+                                        <a th:href="@{/tomessage}">留言</a>
+                                    </li>
+                                    <li><a th:href="@{/toabout}">关于</a></li>
+                                    <li><a th:href="@{/toupfile}">工具下载</a></li>
+                                    <li><a th:href="@{/link}">友人帐</a></li>
+                                    <li><a th:href="@{/photo}">相片墙</a></li>
+                                </ul>
+                            </div>
+                            <!-- Main Menu End-->
+                        </div>
+                        <ul class="header-s-m black_color">
+                            <li class="nav-search">
+                                <a href="#header-search" title="Search"><i class="ti-search"></i></a>
+                            </li>
+                            <li class="themelazer_mb_themelazern sidemenuoption-open is-active"><i class="ti-menu"></i></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="header-search" class="header-search">
+            <form class="header-search-form" th:action="@{/catcearch}" method="get">
+                <input type="search" value="" placeholder="需要什么帮助?" name="find">
+                <button type="submit" class="search-btn">
+                    <i class="ti-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    <!--Header Top-->
+
+    <!-- End Header Top -->
+</header>
+
+
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/theia-sticky-sidebar.js"></script>
+<script src="js/fluidvids.js"></script>
+<script src="js/justified.js"></script>
+<script src="js/slick.js"></script>
+<script src="js/masonry.pkgd.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

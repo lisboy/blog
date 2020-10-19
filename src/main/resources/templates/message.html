@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="author" content="">
+      <meta name="description" content="">
+      <meta name="keywords" content="">
+      <!-- Title-->
+      <title>留言-lisboy</title>
+      <!-- Favicon-->
+      <link href="../img/favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="img/favicon.ico"/>
+      <link rel="icon" href="image/favicon.jpg" type="image/x-icon">
+      <!-- Stylesheets-->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/all.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/blog.css">
+      <!-- or -->
+
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+      <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+   </head>
+   <body style=";background: url('image/body.jpg') no-repeat center center fixed ;background-size: cover;">
+      <!-- SECTION 0 NAV -->
+      <header th:replace="navitagion/main_header::main_header"></header>
+
+      <section id="index-text">
+         <form th:action="@{/catcearch}" method="get">
+            <div class="themelazer_letter_area" >
+               <div class="container" >
+                  <div class="bt-newsletter-wrap" >
+                     <div class="news-img"></div>
+                     <div class="news-content" style="border-radius: 20px;background-image: url('image/u=458327471,2618665836&fm=26&gp=0.jpg');background-size: 100% 100%">
+                        <div class="news-text">
+                           <h4>扬帆起航！</h4>
+                           <p>小小的我有大大的梦</p>
+                        </div>
+                        <div class="form-wrap" >
+                           <input class="inputfind" type="text" name="find" placeholder="内容" required="" >
+                           <input type="submit" value="搜索">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </section>
+      <div  >
+         <div class="container">
+            <div class="row">
+               <div class="col-md-8">
+                  <div class="single_header_wrapper">
+                     <section class="post-full-comments">
+                        <div id="gitalk-container"></div>
+                     </section>
+                  </div>
+               </div>
+               <div th:replace="navitagion/rigth::rigth"></div>
+            </div>
+         </div>
+      </div>
+
+      <div th:replace="navitagion/main_bottom::footer"></div>
+      <script src="js/jquery.js"></script>
+      <script src="js/jquery.sticky.js"></script>
+      <script src="js/theia-sticky-sidebar.js"></script>
+      <script src="js/fluidvids.js"></script>
+      <script src="js/justified.js"></script>
+      <script src="js/slick.js"></script>
+      <script src="js/masonry.pkgd.min.js"></script>
+      <script src="js/main.js"></script>
+      <script type="text/javascript" src="js/blog.js"></script>
+      <script>
+         var gitalk = new Gitalk({
+            clientID: '7e79d430f8024be1401e',
+            clientSecret: '9ef4c6904db5d8c7206b833907e7b6faf1535083',
+            repo: 'gitalk',
+            owner: 'lisboy',
+            admin: ['lisboy'],
+            id: location.pathname,      // 请确保你的 location 连接小于 50 个字符，否则，插件会生成失败
+            distractionFreeMode: false  // 专注模式
+         });
+         gitalk.render('gitalk-container');
+      </script>
+   </body>
+</html>

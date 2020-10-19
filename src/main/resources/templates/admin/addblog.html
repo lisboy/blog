@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>lisboy个人博客后台管理</title>
+
+    <link href="../img/favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="img/favicon.ico"/>
+    <link href="../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/blog.css" rel="stylesheet">
+    <link rel="stylesheet" href="../editormd/css/editormd.min.css" media="all"/>
+</head>
+<body>
+<div class="wrapper" >
+
+
+
+<div class="content-wrapper" >
+<form name="mdEditorForm" style="height: 340px" enctype="multipart/form-data">
+    <div class="form-group" style="margin: 0px auto;width: 400px;">
+        <label for="exampleInputEmail1">标题</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="标题" name="title">
+    </div>
+
+    <div style="margin: 10px auto;width: 400px;">
+        <span>主题图片:<input type="file" name="imgs"></span>
+    </div>
+    <div style="margin: 10px auto;width: 440px;" >
+        <label style="margin-left: 20px;" >分类:</label>
+        <span th:each="lables:${lable}"><input  type="checkbox" id="inlineCheckbox1" th:value="${lables.getLable()}" name="category"> [[${lables.getLable()}]]</span>
+    </div>
+    <div id="test-editormd" style="height: 640px">
+        <textarea name="text" id="text" style="display:none;"> </textarea>
+
+    </div>
+</form>
+</div>
+</div>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../editormd/editormd.min.js"></script>
+
+<script>
+
+    // 设置激活菜单
+    function setSidebarActive(tagUri) {
+        var liObj = $("#" + tagUri);
+        if (liObj.length > 0) {
+            liObj.parent().parent().addClass("active");
+            liObj.addClass("active");
+        }
+    }
+
+
+    $(document).ready(function () {
+        // 激活导航位置
+        setSidebarActive("admin-index");
+    });
+</script>
+
+
+
+<script type="text/javascript">
+    var path=document.getElementById("path");
+    var testEditor;
+    $(function () {
+        testEditor = editormd("test-editormd", {
+            width: "90%",
+            height: 540,
+            syncScrolling: "single",
+            path: "../editormd/lib/",
+            imageUpload: true,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"], // 文件格式限制
+            imageUploadURL : "addblogimg",
+            emoji: false,
+            taskList: true,
+            tocm: true,         // Using [TOCM]
+            tex: true,                   // 开启科学公式TeX语言支持，默认关闭
+            flowChart: true,             // 开启流程图支持，默认关闭
+            sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
+            theme: "dark",//工具栏主题
+            /**下述为新增，上面一行记得加逗号结束*/
+            /*指定需要显示的功能按钮*/
+            saveHTMLToTextarea : true,
+            //下面这一行将使用dark主题
+            toolbarIcons: function () {
+                return ["undo", "redo", "|", "bold",
+                    "italic", "ucwords", "uppercase",
+                    "lowercase", "|", "h1", "h2", "h3", "h4", "h5", "h6", "|",
+                    "list-ul", "list-ol", "table", "datetime", "hr", "image", "html-entities", "link", "reference-link"
+                    , "code", "code-block", "||", "clear",
+                    "watch", "fullscreen", "preview", "releaseIcon", "index",]
+            },
+            /*自定义功能按钮，下面我自定义了2个，一个是发布，一个是返回首页*/
+            toolbarIconTexts: {
+                releaseIcon: "<span bgcolor=\"gray\">发布</span>",
+                index: "<span bgcolor=\"red\">返回首页</span>",
+            },
+
+            /*给自定义按钮指定回调函数*/
+            toolbarHandlers: {
+                releaseIcon: function (cm, icon, cursor, selection) {
+                    contentCommit();//提交表单代码在下面
+                },
+                index: function () {
+                    window.location.href = 'index';
+                },
+            }
+        });
+    });
+
+    /*提交表单的js*/
+    function contentCommit() {
+        mdEditorForm.method = "post";
+        mdEditorForm.action = "addblogok";//提交至服务器的路径
+        mdEditorForm.submit();
+    }
+</script>
+</body>
+</html>

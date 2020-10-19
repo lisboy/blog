@@ -1,0 +1,40 @@
+spring:
+#  profiles:
+#    active: dev
+  mail:
+    username:
+    password:
+    host: smtp.qq.com
+    ##开启加密验证
+    properties.mail.smtp.ssl.enable: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      enabled: true
+      max-request-size: 20MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/myblog?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: root
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  cache:
+    type: redis
+    redis:
+      # value in milliseconds
+      time-to-live: 12000000
+      cache-null-values: false
+mybatis:
+  type-aliases-package: lisboyblog.pojo
+  mapper-locations: classpath:mapper/*.xml
+pagehelper:
+  helperDialect: mysql
+server:
+  port: 8080
+  servlet:
+    context-path: /

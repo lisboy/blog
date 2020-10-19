@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="author" content="">
+      <meta name="description" content="">
+      <meta name="keywords" content="">
+      <!-- Title-->
+      <title>主页-lisboy</title>
+      <style type="text/css">
+         html {
+            overflow: hidden;
+         }
+      </style>
+      <link href="../img/favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="img/favicon.ico"/>
+      <link rel="icon" href="image/favicon.jpg" type="image/x-icon">
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/all.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/blog.css">
+   </head>
+   <body style=";background: url('image/body.jpg') no-repeat center center fixed ;background-size: cover;">
+
+      <header th:replace="navitagion/main_header::main_header"></header>
+
+      <div class="index" >
+          <img id="run"  class="indeximg" src="/img/dbb5a4fd851e831038eff04e97327ec2.jpeg">
+          <p >有你的地方，才叫生活。</p>
+         <a th:href="@{/home}"><p style="color: #6610f2;font-size: 18px;">点击文章阅览我的世界吧~~</p></a>
+      </div>
+
+      <div style="width: 100%;height: 700px;"></div>
+      <div  th:replace="navitagion/main_bottom::footer"></div>
+      <script src="js/jquery.js"></script>
+      <script src="js/slick.js"></script>
+      <script src="js/main.js"></script>
+
+   </body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="author" content="">
+      <meta name="description" content="">
+      <meta name="keywords" content="">
+      <!-- Title-->
+      <title th:text="${oneblog.getTitle()}"></title>
+      <!-- Favicon-->
+       <link href="../img/favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="img/favicon.ico"/>
+      <link rel="icon" href="image/favicon.jpg" type="image/x-icon">
+      <!-- Stylesheets-->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/all.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" th:href="@{/editormd/css/editormd.min.css}"/>
+       <link rel="stylesheet" href="css/blog.css">
+   </head>
+   <body style=";background: url('image/body.jpg') no-repeat center center fixed ;background-size: cover;">
+      <!-- SECTION 0 NAV -->
+      <header th:replace="navitagion/main_header::main_header"></header>
+
+
+          <div style="opacity: 1;margin-top: 100px">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-8" >
+
+                  <div class="single_header_wrapper" style="height: 300px">
+                      <div th:style="';background-image:url('+${#request.getContextPath()+oneblog.getImgs()}+');color: #FFF;width: 96%;background-size: 100% 100%;height: 300px;position: absolute'">
+                     <h1  style="color: #FFF;text-align: center;margin-top: 100px" th:text="${oneblog.getTitle()}">
+                        This Is What The Second Largest Thing In The World
+                     </h1>
+                     <div class="meta-info" style="text-align: center;">
+                        <ul>
+                           <li class="post-author"> <a style="color: #FFF;" href="#" tabindex="0">
+                              <img src="img/lisboy.jpg"  alt="lisboy">lisboy</a>
+                           </li>
+                           <li style="color: #FFF" class="post-date" th:text="${#dates.format(oneblog.getCreationtime(),'yyyy-MM-dd HH:mm:ss')}">July 09 2019</li>
+                           <li style="color: #FFF" class="post-view" th:text="${oneblog.getViews()+'    Views'}">50K Views</li>
+                           <li style="color: #FFF" class="post-comment" th:text="${oneblog.getLikes()+'人点赞'}">4 Comments</li>
+                        </ul>
+                     </div>
+                  </div>
+                   </div>
+
+<!--                   <div class="themelazer_single_feature" style="width: 100%;text-align: center;">-->
+<!--                       <img th:src="${oneblog.getImgs()}" alt="image" style="width: 70%;height: 300px;margin: 0px auto">-->
+<!--                   </div>-->
+                  <div class="themelazer_single_content">
+
+                     <div id="doc-content" >
+<textarea style="display:none;" th:text="${oneblog.getText()}">     <!--${content/}为获取后台的md格式内容。-->
+</textarea>
+                     </div>
+                  </div>
+                  <div class="themelazer_tag_share">
+                     <div class="blog-tags">
+                        <span th:each="tags:${lable}"><a th:href="@{/catcearch(find=${tags.getLable()})}">[[${tags.getLable()}]]</a></span>
+                     </div>
+                  </div>
+
+                   <div class="themelazer-comment-wrapper mb-50">
+                       <div class="themelazer_title_head">
+                           <h3>评论</h3>
+                       </div>
+                       <p id="mess" style="display: none;color: red;text-align: center" >亲！请文明用语哦~</p>
+                       <!--                     <form method="post" id="contact-form" th:action="@{/addcomment}">-->
+                       <div class="row">
+                           <div class="col-md-6">
+                               <div class="single-input-item">
+                                   <label>
+                                       <input type="text" id="name" name="name" placeholder="评论名" required="">
+                                   </label>
+                               </div>
+                           </div>
+                           <div class="col-md-6">
+                               <div class="single-input-item">
+                                   <label>
+                                       <input type="email" id="email" name="email" placeholder="Email" required="">
+                                   </label>
+                               </div>
+                           </div>
+                           <div class="col-12">
+                               <div class="single-input-item">
+                                   <label for="con_message" class="sr-only m-0"></label>
+                                   <textarea name="content" id="con_message" cols="30" rows="7" placeholder="内容" required=""></textarea>
+                               </div>
+                           </div>
+                       </div>
+                       <input  id="blogid" style="display: none" name="blogid" th:value="${oneblog.getId()}">
+                       <input type="submit" href="#name" id="submit" value="评论" class="submit_themelazern_large">
+                       <!--                     </form>-->
+                   </div>
+                  <div class="themelazer_title_head">
+                           <h3>全部评论</h3>
+                   </div>
+                  <ul class="comments_wp_list" id="comment">
+                     <li th:each="comment:${comments}" th:if="${comment ne null}">
+                        <div class="comment_themelazer">
+                            <div class="comment-author">
+                                <a href="#">
+                                    <img src="img/s2.jpg" alt="comments-user">
+                                </a>
+                            </div>
+                           <div class="comment-content">
+                              <div class="comment-meta">
+                                 <h6 style="color: #FFF" th:text="${comment.getName()}">
+                                    Maikel Alisa
+                                 </h6>
+                              </div>
+                              <p style="color: #FFF" th:text="${comment.getContent()}">Mauris mattis auctor cursus. Phasellus tellus tellus, imperdiet ut imperdiet eu, iaculis a sem. Donec vehicula luctus nunc in laoreet. Aliquam erat volutpat. Suspendisse vulputate porttitor condimentum.</p>
+                              <div class="themelazer-comment-icon">
+                                 <p><i class="far fa-clock"></i>
+                                    <span style="color: #FFF" class="margin-left-10" th:text="${comment.getCreationtime()}">Jan 3 at 4:56 pm</span>
+                                    <span class="float-right margin-left-20"><a href="#">reply</a></span>                                         
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                     </li>
+                  </ul>
+
+               </div>
+               <div th:replace="navitagion/rigth::rigth"></div>
+            </div>
+         </div>
+      </div>
+
+     <div th:replace="navitagion/main_bottom::footer"></div>
+      <script src="js/jquery.js"></script>
+      <script src="js/jquery.sticky.js"></script>
+      <script src="js/theia-sticky-sidebar.js"></script>
+      <script src="js/fluidvids.js"></script>
+      <script src="js/justified.js"></script>
+      <script src="js/slick.js"></script>
+      <script src="js/masonry.pkgd.min.js"></script>
+      <script src="js/main.js"></script>
+
+      <script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+      <script th:src="@{/editormd/lib/flowchart.min.js}"></script>
+      <script th:src="@{/editormd/lib/jquery.flowchart.min.js}"></script>
+      <script th:src="@{/editormd/lib/marked.min.js}"></script>
+      <script th:src="@{/editormd/lib/prettify.min.js}"></script>
+      <script th:src="@{/editormd/lib/raphael.min.js}"></script>
+      <script th:src="@{/editormd/lib/sequence-diagram.min.js}"></script>
+      <script th:src="@{/editormd/lib/underscore.min.js}"></script>
+      <script th:src="@{/editormd/editormd.min.js}"></script>
+      <script type="text/javascript" src="js/blog.js"></script>
+      <script type="text/javascript">
+         var testEditor;
+         $(function () {
+            testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id
+               htmlDecode: "style,script,iframe",
+               emoji: true,
+               taskList: true,
+               // tex: true, // 默认不解析
+               // flowChart: true, // 默认不解析
+               // sequenceDiagram: true, // 默认不解析
+               codeFold: true,
+            });
+         });
+
+         let arr = ['傻逼', '垃圾', '尼玛', '你妈逼', '死人','垃圾玩意','SB','渣男']
+         $(document).ready(function(){
+             $("#submit").click(function(){
+                 var name=$("#name").val();
+                var eamil=$("#eamil").val();
+                var content=$("#con_message").val();
+                 var blogid=$("#blogid").val();
+                 for (let i = 0; i <arr.length ; i++) {
+                     if (name.search(arr[i])!=-1||content.search(arr[i])!=-1){
+                         $("#mess").css('display','block');
+                         return;
+                     }
+                 }
+                 htmlobj=$.ajax({
+                     url:"/addcomment?blogid="+blogid+"&name="+name+"&email="+eamil+"&content="+content,
+                     async:false,
+                     type:'post',datatype:'string',
+                     success: function(ret){
+                         window.location.reload();
+                     },
+                     error: function() {
+                         alert('对不起评论失败了');
+                     }});
+             });
+         });
+      </script>
+   </body>
+</html>

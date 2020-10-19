@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="author" content="">
+      <meta name="description" content="">
+      <meta name="keywords" content="">
+      <!-- Title-->
+      <title>搜索-lisboy</title>
+      <!-- Favicon-->
+       <link href="../img/favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="img/favicon.ico"/>
+      <link rel="icon" href="image/favicon.jpg" type="image/x-icon">
+      <!-- Stylesheets-->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/all.min.css">
+      <link rel="stylesheet" href="css/style.css">
+       <link rel="stylesheet" href="css/blog.css">
+   </head>
+   <body style=";background: url('image/body.jpg') no-repeat center center fixed ;background-size: cover;">
+      <!-- SECTION 0 NAV -->
+      <header th:replace="navitagion/main_header::main_header"></header>
+
+      <section id="index-text">
+          <form th:action="@{/catcearch}" method="get">
+              <div class="themelazer_letter_area" >
+                  <div class="container" >
+                      <div class="bt-newsletter-wrap" >
+                          <div class="news-img"></div>
+                          <div class="news-content" style="border-radius: 20px;background-image: url('image/u=458327471,2618665836&fm=26&gp=0.jpg');background-size: 100% 100%">
+                              <div class="news-text">
+                                  <h4>扬帆起航！</h4>
+                                  <p>小小的我有大大的梦</p>
+                              </div>
+                              <div class="form-wrap" >
+                                  <input class="inputfind" type="text" name="find" placeholder="内容" required="" >
+                                  <input type="submit" value="搜索">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </form>
+      </section>
+      <div style="opacity: 1" >
+         <div class="container">
+                   <div class="row">
+                       <div class="col-md-8 themelazer_content">
+
+                           <div class="row" >
+                               <div class="col-md-12" th:if="${cout eq 0}">
+                                   <div class=" blog-style-one blog-small-grid" >
+                                       <p style="font-size: 30px;text-align: center;color: #9c3328">对不起，您要找的篇章还没有发布</p>
+                                   </div>
+                               </div>
+                               <div style="margin: 0px auto">文章</div>
+                               <hr style="background-color: #7cb8bb;height: 1px;width: 100%">
+                               <div class="col-md-12"  th:each="blogs:${blog.list}" >
+
+                                   <div class=" blog-style-one blog-small-grid divi" th:style="'border-radius: 20px;background-image:url('+${#request.getContextPath()+blogs.getImgs()}+');color: #FFF;'">
+                                       <a th:href="@{/toreadblog(id=${blogs.getId()})}" ><div style="height: 250px;"></div></a>
+                                       <div  >
+                                           <div class="single-blog-style-one" style="background-color: black;color: #FFF;width: 95%;filter:Alpha(opacity=0.5);opacity: 0.8;border-radius: 10px;padding: 0px 10px;margin: 0px auto" >
+                                               <h3>
+                                                   <a class="al" th:href="@{/toreadblog(id=${blogs.getId()})}"  th:text="${blogs.getTitle()}" ></a>
+                                               </h3>
+                                               <div class="meta-info"  >
+                                                   <ul>
+                                                       <li class="post-author"> <a th:href="@{/toabout}" tabindex="0" style="color: #FFF">
+                                                           <img src="img/lisboy.jpg" alt="lisboy" >lisboy</a>
+                                                       </li>
+                                                       <li class="post-date" style="color: #FFF" th:text="${#dates.format(blogs.getCreationtime(),'yyyy-MM-dd HH:mm:ss')}">July 09 2019</li>
+                                                       <li class="post-view" style="color: #FFF" th:text="${blogs.getViews()+'   Views'}">50K Views</li>
+                                                   </ul>
+                                               </div>
+                                               <p style="color: #FFF" th:text="${#strings.abbreviate(blogs.getText(),80)}"></p>
+
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+
+                           </div>
+                           <div class="themelazer-pagination">
+                               <div class="themelazer-pagination-wrapper" th:each="pages:${page}"  style="float: left">
+                                   <span><a class="page-numbers" th:href="@{/catcearch(find=${find},pageNum=${pages+1})}" th:text="${pages+1}">1</a></span>
+                               </div>
+                           </div>
+                       </div>
+                       <div th:replace="navitagion/rigth::rigth"></div>
+                   </div>
+            </div>
+         </div>
+      </div>
+
+      <div th:replace="navitagion/main_bottom::footer"></div>
+      <script src="js/jquery.js"></script>
+      <script src="js/jquery.sticky.js"></script>
+      <script src="js/theia-sticky-sidebar.js"></script>
+      <script src="js/fluidvids.js"></script>
+      <script src="js/justified.js"></script>
+      <script src="js/slick.js"></script>
+      <script src="js/masonry.pkgd.min.js"></script>
+      <script src="js/main.js"></script>
+      <script type="text/javascript" src="js/blog.js"></script>
+   </body>
+</html>
